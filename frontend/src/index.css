@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+    --background: #FFFFFF;
+    --surface: #FBFBFC;
+    --surface-secondary: #F4F5F8;
+    --foreground: #0D0E10;
+    --text-muted: #6B6F76;
+    --border: #E4E4E9;
+    --primary: #5E6AD2;
+    --primary-hover: #4E59C7;
+    --success: #16a34a;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --radius: 12px;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+}
+
+.dark {
+    --background: #08090A;
+    --surface: #0F1011;
+    --surface-secondary: #17181A;
+    --foreground: #F7F8F8;
+    --text-muted: #94A3B8;
+    --border: #23252A;
+    --primary: #5E6AD2;
+    --primary-hover: #828FFF;
+    --success: #22C55E;
+    --warning: #FBBF24;
+    --danger: #EF4444;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-foreground: var(--foreground);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+}
+
+html,
+body,
+#root {
+    min-height: 100%;
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+body {
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.011em;
+}
+
+/* Refined scrollbars to match the surface palette */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--border);
+    border-radius: 9999px;
+    border: 2px solid var(--background);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-muted);
+}
+
+/* Consistent focus ring using the brand primary */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}

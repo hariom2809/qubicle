@@ -1,0 +1,13 @@
+django
+django-filter
+djangorestframework
+djangorestframework-simplejwt
+django-cors-headers
+Pillow
+python-dotenv
+drf-spectacular
+drf-spectacular[sidecar]
+psycopg2-binary
+elasticsearch
+elasticsearch-dsl
+django-elasticsearch-dsl
