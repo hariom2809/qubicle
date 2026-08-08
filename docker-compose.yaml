@@ -1,31 +1,15 @@
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-wolfi:9.5.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.0
     container_name: qubicle-elasticsearch
 
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=false
     ports:
       - "9200:9200"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
-    networks:
-      - qubicle
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana:9.5.0
-    container_name: qubicle-kibana
-
-    ports:
-      - "5601:5601"
-    depends_on:
-      - elasticsearch
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    networks:
-      - qubicle
 
 volumes:
   elasticsearch_data:
-networks:
-  qubicle:
