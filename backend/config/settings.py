@@ -12,7 +12,7 @@ SECRET_KEY = settings.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = settings.DEBUG
 
-ALLOWED_HOSTS = [settings.ALLOWED_HOSTS]
+ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
 # Application definition
 INSTALLED_APPS = [
@@ -28,10 +28,12 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_spectacular',
     'drf_spectacular_sidecar',
+    'django_elasticsearch_dsl',
     'accounts',
     'projects.apps.ProjectsConfig',
     'issues.apps.IssuesConfig',
     'comments',
+    'search.apps.SearchConfig',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +75,12 @@ DATABASES = {
         'PASSWORD': settings.DATABASE_PASSWORD,
         'HOST': settings.DATABASE_HOST,
         'PORT': settings.DATABASE_PORT,
+    }
+}
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': settings.ELASTICSEARCH_HOST
     }
 }
 
