@@ -1,4 +1,4 @@
-# Jira Clone Backend
+# Qubicle Backend
 
 ## Overview
 
@@ -20,7 +20,7 @@ This project is the backend implementation for Jira, **Project Management Softwa
 ## Project Structure
 
 ```text
-Jira-Clone-Backend/
+backend/
 |
 |--.venv/
 |--accounts/
