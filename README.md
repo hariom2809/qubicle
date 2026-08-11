@@ -1,6 +1,4 @@
-<div align="center>
 # Qubicle 
-</div>
 
 ![Banner](./docs/banner.png)
 
