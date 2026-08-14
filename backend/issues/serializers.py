@@ -27,6 +27,8 @@ class PatchIssueSerializer(serializers.ModelSerializer):
         fields = ["status","priority", "assignee", "due_date"]
 
 class IssueActivitySerializer(serializers.ModelSerializer):
+    actor = UserSerializer(read_only=True)
+
     class Meta:
         model = IssueActivity
         fields = "__all__"

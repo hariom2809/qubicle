@@ -1,6 +1,8 @@
 import IssueStatsRow from "./IssueStatsRow"
 import Card from "../../../components/ui/Card"
-import { formatDate } from "../../../utils/formatDate"
+import { formatDate, formatDateTime } from "../../../utils/formatDate"
+import { userName } from "../../../utils/formatUser"
+import { formatStatus } from "../../../utils/formatStatus"
 import StatusBadge from "../../../components/ui/StatusBadge"
 import PriorityBadge from "../../../components/ui/PriorityBadge"
 
@@ -28,6 +30,14 @@ export default function IssueStats({ issue }) {
                     label="Priority"
                     value={<PriorityBadge priority={issue.priority} />}
                 />
+                <IssueStatsRow
+                    label="Type"
+                    value={formatStatus(issue.type)}
+                />
+                <IssueStatsRow
+                    label="Issue"
+                    value={issue.number || "—"}
+                />
             </Section>
 
             <Section title="Dates">
@@ -37,22 +47,22 @@ export default function IssueStats({ issue }) {
                 />
                 <IssueStatsRow
                     label="Last update"
-                    value={formatDate(issue.updated_at)}
+                    value={formatDateTime(issue.updated_at)}
                 />
                 <IssueStatsRow
                     label="Due date"
-                    value={formatDate(issue.due_date)}
+                    value={issue.due_date ? formatDateTime(issue.due_date) : "Not set"}
                 />
             </Section>
 
             <Section title="People">
                 <IssueStatsRow
                     label="Reporter"
-                    value={issue.reporter.name}
+                    value={userName(issue.reporter, "Unknown user")}
                 />
                 <IssueStatsRow
                     label="Assigned to"
-                    value={issue.assignee || "Unassigned"}
+                    value={userName(issue.assignee, "Unassigned")}
                 />
             </Section>
         </Card>

@@ -1,6 +1,10 @@
+from datetime import datetime
+
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
+from django.utils import timezone
 
+from accounts.models import User
 from .models import Issue, IssueActivity
 
 @receiver(pre_save, sender=Issue)
@@ -22,12 +26,28 @@ def generate_issue_number(sender, instance, **kwargs):
 
     instance.number = f"{project_key}-{new_number}"
 
+def display_value(value):
+    """Render a tracked field value as a readable string for the activity log."""
+    if value is None:
+        return ""
+
+    if isinstance(value, User):
+        return value.name.strip() or value.email
+
+    if isinstance(value, datetime):
+        return timezone.localtime(value).strftime("%d %b %Y, %H:%M")
+
+    return str(value)
+
 @receiver(pre_save, sender=Issue)
 def audit_activity_log(sender, instance, **kwargs):
     if instance._state.adding:
         return
-    
-    actor = getattr(instance, "_actor")
+
+    actor = getattr(instance, "_actor", None)
+    if actor is None:
+        return
+
     old_issue = Issue.objects.get(pk=instance.pk)
     tracked_fields = ["status", "priority", "assignee", "due_date"]
 
@@ -39,6 +59,7 @@ def audit_activity_log(sender, instance, **kwargs):
             IssueActivity.objects.create(
                 issue=instance,
                 actor=actor,
-                old_value=old_value,
-                new_value=new_value
+                field=field,
+                old_value=display_value(old_value),
+                new_value=display_value(new_value)
             )

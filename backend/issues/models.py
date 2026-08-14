@@ -44,6 +44,6 @@ class IssueActivity(models.Model):
     issue       = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name="activity")
     actor       = models.ForeignKey(User, on_delete=models.CASCADE, related_name="issue_activity")
     field       = models.CharField(max_length=20)
-    old_value   = models.CharField(max_length=20)
-    new_value   = models.CharField(max_length=20)
+    old_value   = models.CharField(max_length=255, blank=True)
+    new_value   = models.CharField(max_length=255, blank=True)
     created_at  = models.DateTimeField(auto_now_add=True)

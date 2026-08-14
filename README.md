@@ -41,6 +41,8 @@ qubicle
 git clone https://github.com/hariom2809/qubicle.git
 ```
 
+### For Frontend and Backend setup explore thier respective REAME files
+
 ### ⚠️ After setting up backend and frontend run this command otherwise you will get unexpected erross and make docker desktop is installed in your system if using MacOs | Windows and docker for Linux
 ```bash
 docker-compose up -d
@@ -50,5 +52,5 @@ docker-compose up -d
 
 **Hariom**
 
-Email: hariomgupta2809@gmail.com
-Linkedin: https://www.linkedin.com/in/hariom2809/
+- Email: hariomgupta2809@gmail.com
+- Linkedin: https://www.linkedin.com/in/hariom2809/

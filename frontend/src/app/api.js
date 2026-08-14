@@ -13,7 +13,7 @@ api.interceptors.response.use(
 
     if (error.response?.status !== 401) return Promise.reject(error)
     if (originalRequest._retry) return Promise.reject(error)
-    if (originalRequest.url.inclues("/auth/token/refresh")) return Promise.reject(error)
+    if (originalRequest.url?.includes("/auth/token/refresh")) return Promise.reject(error)
     
     originalRequest._retry = true
 

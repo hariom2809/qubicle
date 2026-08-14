@@ -7,18 +7,34 @@ import ProjectDetail from "../components/ProjectDetail"
 import KanbanStatsGrid from "../../kanban/components/KanbanStstaGrid"
 import KanbanBoard from "../../kanban/pages/KanbanBoard"
 import { useListIssues  } from "../../issue/hooks/useListIssues"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import AddMemberModal from "../components/AddMemberModal"
 import RaiseIssueModal from "../../issue/components/RaiseIssueModal"
+import KanbanFilterBar from "../../kanban/components/KanbanFilterBar"
+
+const EMPTY_FILTERS = {
+    search: "",
+    status: "",
+    type: "",
+    priority: "",
+}
 
 export default function ProjectBoard() {
 
     const { projectId } = useParams()
     const projectQuery = useGetProject(projectId)
-    const issueQuery = useListIssues(projectId)
+
+    const [filters, setFilters] = useState(EMPTY_FILTERS)
+    const issueQuery = useListIssues(projectId, filters)
 
     const [showRaiseIssue, setShowRaiseIssue] = useState(false)
     const [showAddMember, setShowAddMember] = useState(false)
+
+    const handleFilterChange = useCallback((name, value) => {
+        if (name === "reset") return setFilters(EMPTY_FILTERS)
+
+        setFilters((prev) => ({ ...prev, [name]: value }))
+    }, [])
 
     if (projectQuery.isLoading) {
         return (
@@ -58,6 +74,7 @@ export default function ProjectBoard() {
             <AddMemberModal
                 isOpen={showAddMember}
                 onClose={() => setShowAddMember(false)}
+                projectId={projectId}
             />
 
             <RaiseIssueModal
@@ -74,7 +91,13 @@ export default function ProjectBoard() {
                 issues={issueQuery.data?.results || []}
             />
 
-            <KanbanBoard 
+            <KanbanFilterBar
+                filters={filters}
+                onChange={handleFilterChange}
+                isFetching={issueQuery.isFetching}
+            />
+
+            <KanbanBoard
                 projectId={projectId}
                 issues={issueQuery.data?.results || []}
             />

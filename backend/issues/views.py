@@ -45,9 +45,9 @@ class IssueCommentView(generics.ListCreateAPIView):
         return GetCommentSerializer
 
     def get_queryset(self):
-        return Comment.objects.filter(
+        return Comment.objects.select_related("author").filter(
             issue=self.kwargs["issue_id"]
-        ).order_by("updated_at")
+        ).order_by("-created_at")
 
     def perform_create(self, serializer):
         issue = get_object_or_404(Issue, pk= self.kwargs["issue_id"])
@@ -58,6 +58,6 @@ class IssueActivityLogView(generics.ListAPIView):
     serializer_class = IssueActivitySerializer
 
     def get_queryset(self):
-        return IssueActivity.objects.filter(
+        return IssueActivity.objects.select_related("actor").filter(
             issue=self.kwargs["issue_id"]
-        ).order_by("created_at")
+        ).order_by("-created_at")

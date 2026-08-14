@@ -1,7 +1,14 @@
 import api from "../../../app/api"
 
-export const listIssues = async (projectId) => {
-    const response = await api.get(`/projects/${projectId}/issues/`)
+export const listIssues = async (projectId, filters = {}) => {
+    const params = {}
+
+    if (filters.search?.trim()) params.search = filters.search.trim()
+    if (filters.type) params.type = filters.type
+    if (filters.status) params.status = filters.status
+    if (filters.priority) params.priority = filters.priority
+
+    const response = await api.get(`/projects/${projectId}/issues/`, { params })
     return response.data
 }
 
@@ -16,6 +23,6 @@ export const updateIssue = async (issueId, issueData) => {
 }
 
 export const getIssue = async (issueId) => {
-    const response = await api.get(`/issues/${issueId}`)
+    const response = await api.get(`/issues/${issueId}/`)
     return response.data
 }

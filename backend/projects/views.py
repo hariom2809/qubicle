@@ -74,7 +74,7 @@ class AddProjectMemberView(APIView):
         serializer = ProjectMembershipSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        target_user = serializer.valid_data["user"]
+        target_user = serializer.validated_data["user"]
         if ProjectMembership.objects.filter(project=project, user=target_user).exists():
             return Response(
                 {"message": "User is already a member Project."},
@@ -127,7 +127,7 @@ class ProjectIssueView(generics.ListCreateAPIView):
         ).order_by("number")
     
     filterset_fields = ["type", "status", "priority", "assignee"]
-    search_fields = ["key", "title"]
+    search_fields = ["number", "title", "description"]
 
     def perform_create(self, serializer):
         project = get_object_or_404(Project, pk=self.kwargs["project_id"])

@@ -19,7 +19,7 @@ const ProjectForm = ({ onClose }) => {
     })
   }
 
-  return (-
+  return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <ProjectFormFields 
         formData={formData}

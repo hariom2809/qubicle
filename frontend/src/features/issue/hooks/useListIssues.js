@@ -1,10 +1,11 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, keepPreviousData } from "@tanstack/react-query"
 import { listIssues } from "../services/issueApi"
 
-export const useListIssues = (projectId) => {
+export const useListIssues = (projectId, filters = {}) => {
     return useQuery({
-        queryKey: ["issues", projectId],
-        queryFn: () => listIssues(projectId),
-        enabled: Boolean(projectId)
+        queryKey: ["issues", projectId, filters],
+        queryFn: () => listIssues(projectId, filters),
+        enabled: Boolean(projectId),
+        placeholderData: keepPreviousData,
     })
 }
