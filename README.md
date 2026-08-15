@@ -8,6 +8,11 @@
 It can manage your project progress by showing the different task on the basis of thier status.
 Teammates can communicate with the help of comments on the particular issue they are having in a project.  A project cna have multiple issues and the issues cna have multiple people resolving that one issue so it is keeps track of all suggestions in the form of comments people have made while exploring the "STATUS TABLE" **(Kanban Board)**
 
+<p align="center">
+  <a href="https://youtu.be/RQ6newzeouY">
+    <img src="https://img.youtube.com/vi/RQ6newzeouY/maxresdefault.jpg" width="700">
+  </a>
+</p>
 
 ## Motivation
 
