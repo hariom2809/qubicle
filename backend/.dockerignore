@@ -7,6 +7,5 @@ __pycache__
 .gitignore
 docs/
 README.md
-docker-compose.yaml
 Dockerfile
 .dockerignore

@@ -48,6 +48,8 @@ git clone https://github.com/hariom2809/qubicle.git
 docker-compose up -d
 ```
 
+The docker compose will run the all container at once and it will need some configuration at your system too.  If you wnat you cna also add the postgres sql in the compose file and run it too with the all other containers i have the postgres installed on my system so I hvant run it in compose file .
+
 ## Author/Maintainer
 
 **Hariom**
